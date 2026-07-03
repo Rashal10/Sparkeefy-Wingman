@@ -2,7 +2,7 @@
 
 Local Streamlit app that helps you figure out what to text in dating and relationship situations.
 
-Uses DeepSeek (`deepseek-v4-flash`) with a custom Sarthak/Sparkeefy style prompt.
+Uses DeepSeek (`deepseek-v4-flash`)
 
 ## Setup
 
