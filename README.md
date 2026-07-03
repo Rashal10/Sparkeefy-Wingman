@@ -2,7 +2,7 @@
 
 Sparkeefy Wingman helps you figure out what to text in dating and relationship situations.
 
-I have used ****DeepSeek (`deepseek-v4-flash`)
+I have used **DeepSeek**(`deepseek-v4-flash`)
 
 ## **Local setup**
 
