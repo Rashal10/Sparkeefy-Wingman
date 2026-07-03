@@ -1,30 +1,24 @@
 # Sparkeefy Wingman
 
-Streamlit app that helps you figure out what to text in dating and relationship situations. Describe what's going on, get a quick read on the vibe, advice in plain language, and 1–3 messages you can copy and send.
+Sparkeefy Wingman helps you figure out what to text in dating and relationship situations.
 
-Uses DeepSeek (`deepseek-v4-flash`)
+I have used ****DeepSeek (`deepseek-v4-flash`)
 
-## Live demo
-
-Deploy on [Streamlit Community Cloud](https://share.streamlit.io) (free for public repos). After deploy, your app URL will look like:
-
-`https://your-app-name.streamlit.app`
-
-## Local setup
+## **Local setup**
 
 ```bash
 python -m venv .venv
-
-# Windows
-.venv\Scripts\activate
-
-# macOS / Linux
-source .venv/bin/activate
+.venv\Scripts\activate          # Windows
+# source .venv/bin/activate     # macOS / Linux
 
 pip install -r requirements.txt
-copy .env.example .env   # Windows
-# cp .env.example .env   # macOS / Linux
+cp .env.example .env            # add your DeepSeek API key
+streamlit run app.py
 ```
+
+App runs at [http://localhost:8501](http://localhost:8501)
+
+Hosted application at [https://sparkeefy-wingman.streamlit.app/](https://sparkeefy-wingman.streamlit.app/)
 
 Add your API key to `.env`:
 
@@ -32,76 +26,50 @@ Add your API key to `.env`:
 DEEPSEEK_API_KEY=your_key_here
 ```
 
-Get a key at https://platform.deepseek.com
 
-**Never commit `.env`** — it is listed in `.gitignore`.
 
-## Run locally
+## Configuration
 
-```bash
-streamlit run app.py
-```
 
-Open http://localhost:8501
+| Variable              | Description          | Default                    |
+| --------------------- | -------------------- | -------------------------- |
+| `DEEPSEEK_API_KEY`    | DeepSeek API key     | —                          |
+| `DEEPSEEK_BASE_URL`   | API base URL         | `https://api.deepseek.com` |
+| `DEEPSEEK_MODEL`      | Model ID             | `deepseek-v4-flash`        |
+| `WINGMAN_MAX_TOKENS`  | Max response tokens  | `500`                      |
+| `WINGMAN_TEMPERATURE` | Sampling temperature | `0.7`                      |
 
-## Deploy to Streamlit Cloud (free)
 
-1. Push this repo to GitHub (public repo for free tier).
-2. Go to https://share.streamlit.io and sign in with GitHub.
-3. Click **Create app** and select:
-   - **Repository:** your fork or `Rashal10/Sparkeefy-Wingman`
-   - **Branch:** `main`
-   - **Main file path:** `app.py`
-4. Open **Advanced settings → Secrets** and add:
+## Output
 
-```toml
-DEEPSEEK_API_KEY = "your_actual_deepseek_key_here"
-DEEPSEEK_BASE_URL = "https://api.deepseek.com"
-DEEPSEEK_MODEL = "deepseek-v4-flash"
-WINGMAN_MAX_TOKENS = 500
-WINGMAN_TEMPERATURE = 0.7
-```
+Each response is structured JSON:
 
-5. Click **Deploy** and wait 2–5 minutes for the build to finish.
 
-Pushes to `main` redeploy automatically. Update secrets anytime under **Manage app → Settings → Secrets**.
+| Field                | Description                                 |
+| -------------------- | ------------------------------------------- |
+| `energy_read`        | Read on the other person's vibe             |
+| `wingman_response`   | Advice in plain language                    |
+| `suggested_messages` | 1–3 copy-paste message options              |
+| `follow_up_question` | Optional clarifying question                |
+| `confidence`         | Model confidence (0–1)                      |
+| `safety_flag`        | Set when input/output violates safety rules |
 
-## Project layout
+
+
+
+## Project structure
 
 ```
 app.py                  Streamlit UI
 wingman/
-  client.py             DeepSeek API calls
-  config.py             env settings
-  prompt.py             system prompt + few-shot examples
-  safety.py             basic input/output checks
-  schema.py             response models
-  service.py            main entry point for the app
-requirements.txt
-.env.example
-.streamlit/config.toml  theme + cloud settings
-eval/                   evaluation scenarios (CSV / XLSX)
+  client.py             DeepSeek API client
+  config.py             Settings from environment
+  prompt.py             System prompt and examples
+  safety.py             Input/output safety checks
+  schema.py             Response models and validation
+  service.py            Application service layer
+eval/                   Evaluation dataset (CSV / XLSX)
 ```
 
-## Response format
 
-The model returns JSON with:
 
-- `energy_read` — read on the other person's vibe
-- `wingman_response` — advice for you
-- `suggested_messages` — copy-paste texts
-- `follow_up_question` — optional, only when needed
-- `confidence` — 0 to 1
-- `safety_flag` — true for harassment/manipulation requests
-
-## Env vars
-
-| Variable | Default |
-|----------|---------|
-| `DEEPSEEK_API_KEY` | required |
-| `DEEPSEEK_BASE_URL` | `https://api.deepseek.com` |
-| `DEEPSEEK_MODEL` | `deepseek-v4-flash` |
-| `WINGMAN_MAX_TOKENS` | `500` |
-| `WINGMAN_TEMPERATURE` | `0.7` |
-
-On Streamlit Cloud, set these in **Secrets** (not in the repo).
