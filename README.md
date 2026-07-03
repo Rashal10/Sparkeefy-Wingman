@@ -1,6 +1,6 @@
 # Sparkeefy Wingman
 
-Local Streamlit app that helps you figure out what to text in dating and relationship situations. Describe what's going on, get a quick read on the vibe, advice in plain language, and 1-3 messages you can copy and send.
+Local Streamlit app that helps you figure out what to text in dating and relationship situations.
 
 Uses DeepSeek (`deepseek-v4-flash`) with a custom Sarthak/Sparkeefy style prompt.
 
