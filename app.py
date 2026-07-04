@@ -32,7 +32,7 @@ RELATIONSHIP_OPTIONS = [
     "dating",
     "relationship",
     "parents",
-    "siblings"
+    "siblings",
     "friend",
 ]
 EMOTION_OPTIONS = [
