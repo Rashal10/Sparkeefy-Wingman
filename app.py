@@ -31,6 +31,9 @@ RELATIONSHIP_OPTIONS = [
     "situationship",
     "dating",
     "relationship",
+    "parents",
+    "siblings"
+    "friend",
 ]
 EMOTION_OPTIONS = [
     NONE_OPTION,
@@ -41,6 +44,8 @@ EMOTION_OPTIONS = [
     "guilty",
     "overthinking",
     "calm",
+    "sad",
+    "guilty"
 ]
 
 CUSTOM_CSS = """
